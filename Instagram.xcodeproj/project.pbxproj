@@ -17,6 +17,8 @@
 		708C16802694E9B7000478E7 /* InstagramUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 708C167F2694E9B7000478E7 /* InstagramUITests.m */; };
 		708C16952694F4A3000478E7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 708C16942694F4A3000478E7 /* LoginViewController.m */; };
 		708C16982694F61C000478E7 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 708C16972694F61C000478E7 /* FeedViewController.m */; };
+		708C169B2695031C000478E7 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 708C169A2695031C000478E7 /* ComposeViewController.m */; };
+		708C169E269505D9000478E7 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 708C169D269505D9000478E7 /* Post.m */; };
 		D9F9089C83172C269FDDBA8F /* Pods_Instagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACBA4FC548537B67B334017 /* Pods_Instagram.framework */; };
 		E5C753831FE57442279C2666 /* Pods_Instagram_InstagramUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F92AAE634DE61685E44118E /* Pods_Instagram_InstagramUITests.framework */; };
 		F714DB8C167ED482067FFC89 /* Pods_InstagramTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4FBA83F386A304646964BE /* Pods_InstagramTests.framework */; };
@@ -67,6 +69,10 @@
 		708C16942694F4A3000478E7 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		708C16962694F61C000478E7 /* FeedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
 		708C16972694F61C000478E7 /* FeedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
+		708C16992695031C000478E7 /* ComposeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
+		708C169A2695031C000478E7 /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
+		708C169C269505D9000478E7 /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
+		708C169D269505D9000478E7 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		9ACBA4FC548537B67B334017 /* Pods_Instagram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instagram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFD1ACBE5726BA0C56A4221F /* Pods-Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.debug.xcconfig"; path = "Target Support Files/Pods-Instagram/Pods-Instagram.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,6 +180,8 @@
 		708C168D2694F458000478E7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				708C169C269505D9000478E7 /* Post.h */,
+				708C169D269505D9000478E7 /* Post.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -192,6 +200,8 @@
 				708C16942694F4A3000478E7 /* LoginViewController.m */,
 				708C16962694F61C000478E7 /* FeedViewController.h */,
 				708C16972694F61C000478E7 /* FeedViewController.m */,
+				708C16992695031C000478E7 /* ComposeViewController.h */,
+				708C169A2695031C000478E7 /* ComposeViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -446,8 +456,10 @@
 				708C16952694F4A3000478E7 /* LoginViewController.m in Sources */,
 				708C16982694F61C000478E7 /* FeedViewController.m in Sources */,
 				708C165A2694E9B5000478E7 /* AppDelegate.m in Sources */,
+				708C169B2695031C000478E7 /* ComposeViewController.m in Sources */,
 				708C166B2694E9B6000478E7 /* main.m in Sources */,
 				708C165D2694E9B5000478E7 /* SceneDelegate.m in Sources */,
+				708C169E269505D9000478E7 /* Post.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
