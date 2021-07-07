@@ -16,6 +16,7 @@
 @dynamic image;
 @dynamic likeCount;
 @dynamic commentCount;
+@dynamic username;
 
 + (nonnull NSString *)parseClassName {
     return @"Post";
@@ -28,6 +29,7 @@
     newPost.caption = caption;
     newPost.likeCount = @(0);
     newPost.commentCount = @(0);
+    newPost.username = [PFUser currentUser].username;
     return newPost;
 }
 

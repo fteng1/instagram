@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7033CCBB26961C6C00D52FAC /* InfiniteScrollActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7033CCBA26961C6C00D52FAC /* InfiniteScrollActivityView.m */; };
+		7033CCBE2696458900D52FAC /* PostHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7033CCBD2696458900D52FAC /* PostHeaderView.m */; };
 		708C165A2694E9B5000478E7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 708C16592694E9B5000478E7 /* AppDelegate.m */; };
 		708C165D2694E9B5000478E7 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 708C165C2694E9B5000478E7 /* SceneDelegate.m */; };
 		708C16632694E9B6000478E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 708C16612694E9B6000478E7 /* Main.storyboard */; };
@@ -54,6 +55,8 @@
 		649396954A3B20F18DE13BBD /* Pods-InstagramTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramTests.release.xcconfig"; path = "Target Support Files/Pods-InstagramTests/Pods-InstagramTests.release.xcconfig"; sourceTree = "<group>"; };
 		7033CCB926961C6C00D52FAC /* InfiniteScrollActivityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfiniteScrollActivityView.h; sourceTree = "<group>"; };
 		7033CCBA26961C6C00D52FAC /* InfiniteScrollActivityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfiniteScrollActivityView.m; sourceTree = "<group>"; };
+		7033CCBC2696458900D52FAC /* PostHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostHeaderView.h; sourceTree = "<group>"; };
+		7033CCBD2696458900D52FAC /* PostHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostHeaderView.m; sourceTree = "<group>"; };
 		708C16552694E9B5000478E7 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		708C16582694E9B5000478E7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		708C16592694E9B5000478E7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -202,6 +205,8 @@
 				708C16A026950EFF000478E7 /* PostCell.m */,
 				7033CCB926961C6C00D52FAC /* InfiniteScrollActivityView.h */,
 				7033CCBA26961C6C00D52FAC /* InfiniteScrollActivityView.m */,
+				7033CCBC2696458900D52FAC /* PostHeaderView.h */,
+				7033CCBD2696458900D52FAC /* PostHeaderView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -469,6 +474,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				708C16952694F4A3000478E7 /* LoginViewController.m in Sources */,
+				7033CCBE2696458900D52FAC /* PostHeaderView.m in Sources */,
 				708C16982694F61C000478E7 /* FeedViewController.m in Sources */,
 				7033CCBB26961C6C00D52FAC /* InfiniteScrollActivityView.m in Sources */,
 				708C165A2694E9B5000478E7 /* AppDelegate.m in Sources */,

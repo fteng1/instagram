@@ -14,6 +14,8 @@
 #import "DetailsViewController.h"
 #import "ComposeViewController.h"
 #import "InfiniteScrollActivityView.h"
+#import <DateTools.h>
+#import "PostHeaderView.h"
 
 @interface FeedViewController () <ComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *feedTableView;
@@ -21,6 +23,7 @@
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (assign, nonatomic) BOOL isMoreDataLoading;
 @property (strong, nonatomic) InfiniteScrollActivityView *loadingMoreView;
+@property (strong, nonatomic) NSString *HeaderViewIdentifier;
 @end
 
 @implementation FeedViewController
@@ -28,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.HeaderViewIdentifier = @"PostHeaderView";
     self.feedTableView.delegate = self;
     self.feedTableView.dataSource = self;
     [self fetchPosts];
@@ -46,6 +50,9 @@
     UIEdgeInsets insets = self.feedTableView.contentInset;
     insets.bottom += InfiniteScrollActivityView.defaultHeight;
     self.feedTableView.contentInset = insets;
+    
+//    [self.feedTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"PostCell"];
+    [self.feedTableView registerClass:[PostHeaderView class] forHeaderFooterViewReuseIdentifier:self.HeaderViewIdentifier];
 }
 
 - (void)fetchPosts {
@@ -89,12 +96,16 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [self.posts count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
-    Post *post = self.posts[indexPath.row];
+    Post *post = self.posts[indexPath.section];
     cell.photoView.image = [UIImage imageWithData:post.image.getData];
     cell.captionLabel.text = post.caption;
     return cell;
@@ -129,11 +140,11 @@
     }];
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row + 1 == [self.posts count]){
-        [self loadMoreData];
-    }
-}
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+//    if(indexPath.row + 1 == [self.posts count]){
+//        [self loadMoreData];
+//    }
+//}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if(!self.isMoreDataLoading){
@@ -154,6 +165,31 @@
             [self loadMoreData];
         }
     }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    PostHeaderView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:self.HeaderViewIdentifier];
+    if ([self.posts count] > 0) {
+        // Set text labels for username and date posted
+        Post *post = self.posts[section];
+        header.textLabel.text = post.username;
+        header.timestampLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 21)];
+        
+        // Convert the createdAt property into a string
+        NSString *createdAtOriginalString = post.createdAt.description;
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        // Configure the input format to parse the date string
+        formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss Z";
+        // Convert String to Date
+        NSDate *date = [formatter dateFromString:createdAtOriginalString];
+        // Put date in time ago format and set label
+        header.timestampLabel.text = date.shortTimeAgoSinceNow;
+    }
+    return header;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 25;
 }
 
 #pragma mark - Navigation
