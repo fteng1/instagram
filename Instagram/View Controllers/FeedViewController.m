@@ -12,10 +12,11 @@
 #import "PostCell.h"
 #import "Post.h"
 #import "DetailsViewController.h"
+#import "ComposeViewController.h"
 
-@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface FeedViewController () <ComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *feedTableView;
-@property (strong, nonatomic) NSArray *posts;
+@property (strong, nonatomic) NSMutableArray *posts;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @end
@@ -38,6 +39,7 @@
 - (void)fetchPosts {
     // construct query
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
+    [query orderByDescending:@"createdAt"];
     query.limit = 20;
 
     // fetch data asynchronously
@@ -69,6 +71,11 @@
     }];
 }
 
+- (void)didPost:(Post *)post {
+    [self.posts insertObject:post atIndex:0];
+    [self.feedTableView reloadData];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.posts count];
 }
@@ -93,6 +100,12 @@
         
         DetailsViewController *detailsViewController = [segue destinationViewController];
         detailsViewController.post = post;
+    }
+    // Bring up compose view if compose button is pressed
+    if ([[segue identifier] isEqualToString:@"composeSegue"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+        composeController.delegate = self;
     }
 }
 

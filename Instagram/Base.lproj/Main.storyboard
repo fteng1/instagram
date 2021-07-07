@@ -149,7 +149,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="insta_camera_btn" id="vZN-Z4-1oD">
                             <connections>
-                                <segue destination="iVM-Xe-sZT" kind="presentation" id="Vb4-az-c0w"/>
+                                <segue destination="iVM-Xe-sZT" kind="presentation" identifier="composeSegue" id="Vb4-az-c0w"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

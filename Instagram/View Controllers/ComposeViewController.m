@@ -66,11 +66,13 @@
 }
 
 - (IBAction)onShareTap:(id)sender {
-    [Post postUserImage:self.pickedImageView.image withCaption:self.captionField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    Post *newPost = [Post initPost:self.pickedImageView.image withCaption:self.captionField.text];
+    [Post postUserImage:newPost withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"Post share failed: %@", error.localizedDescription);
         }
         else {
+            [self.delegate didPost:newPost];
             NSLog(@"Post shared successfully");
         }
     }];
