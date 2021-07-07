@@ -140,12 +140,6 @@
     }];
 }
 
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if(indexPath.row + 1 == [self.posts count]){
-//        [self loadMoreData];
-//    }
-//}
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if(!self.isMoreDataLoading){
         // Calculate the position of one screen length before the bottom of the results
@@ -173,7 +167,9 @@
         // Set text labels for username and date posted
         Post *post = self.posts[section];
         header.textLabel.text = post.username;
-        header.timestampLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 21)];
+        if (header.timestampLabel == nil) {
+            header.timestampLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 21)];
+        }
         
         // Convert the createdAt property into a string
         NSString *createdAtOriginalString = post.createdAt.description;

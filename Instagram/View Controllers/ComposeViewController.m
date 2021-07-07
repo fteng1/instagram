@@ -7,6 +7,7 @@
 
 #import "ComposeViewController.h"
 #import "Post.h"
+#import <Parse/Parse.h>
 
 @interface ComposeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *pickedImageView;
@@ -74,6 +75,9 @@
         else {
             [self.delegate didPost:newPost];
             NSLog(@"Post shared successfully");
+            PFUser *currentUser = [PFUser currentUser];
+            [currentUser incrementKey:@"numPosts"];
+            [currentUser saveInBackground];
         }
     }];
     [self dismissViewControllerAnimated:YES completion:nil];

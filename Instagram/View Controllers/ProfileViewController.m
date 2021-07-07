@@ -13,7 +13,7 @@
 #import "Post.h"
 #import <DateTools.h>
 
-@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
+@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UIImagePickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *userTableView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
@@ -37,6 +37,10 @@
     [self fetchPosts];
     [self.userTableView reloadData];
     
+    // change shape of profile picture to be a circle
+    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height /2;
+    self.profileImageView.layer.masksToBounds = YES;
+    
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [self.userTableView insertSubview:self.refreshControl atIndex:0];
@@ -52,6 +56,15 @@
     self.userTableView.contentInset = insets;
     
     [self.userTableView registerClass:[PostHeaderView class] forHeaderFooterViewReuseIdentifier:self.HeaderViewIdentifier];
+    
+    [self updateFields];
+}
+
+- (void)updateFields {
+    // Set fields on page
+    self.usernameLabel.text = [PFUser currentUser].username;
+    self.postCountLabel.text = [NSString stringWithFormat:@"%@", [[PFUser currentUser] valueForKey:@"numPosts"]];
+    self.profileImageView.image = [UIImage imageWithData:((PFFileObject *)([[PFUser currentUser] valueForKey:@"profilePicture"])).getData];
 }
 
 - (void)fetchPosts {
@@ -71,24 +84,10 @@
         [self.userTableView reloadData];
         [self.refreshControl endRefreshing];
     }];
+    
+    // update user information
+    [self updateFields];
 }
-
-//- (IBAction)onLogoutTap:(id)sender {
-//    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-//        // PFUser.current() will now be nil
-//        if (error != nil) {
-//            NSLog(@"User log out failed: %@", error.localizedDescription);
-//        }
-//        else {
-//            NSLog(@"User logged out successfully");
-//            SceneDelegate *sceneDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
-//
-//            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//            LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-//            sceneDelegate.window.rootViewController = loginViewController;
-//        }
-//    }];
-//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
@@ -136,11 +135,6 @@
     }];
 }
 
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if(indexPath.row + 1 == [self.posts count]){
-//        [self loadMoreData];
-//    }
-//}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if(!self.isMoreDataLoading){
@@ -163,12 +157,62 @@
     }
 }
 
+- (IBAction)changeProfile:(id)sender {
+    // The Xcode simulator does not support taking pictures, so let's first check that the camera is indeed supported on the device before trying to present it.
+    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+    imagePickerVC.delegate = self;
+    imagePickerVC.allowsEditing = YES;
+    
+    // The Xcode simulator does not support taking pictures, so let's first check that the camera is indeed supported on the device before trying to present it.
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    else {
+        NSLog(@"Camera 🚫 available so we will use photo library instead");
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
+    // Get the image captured by the UIImagePickerController
+    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+    editedImage = [self resizeImage:editedImage withSize:CGSizeMake(300, 300)];
+    
+    // Do something with the images (based on your use case)
+    self.profileImageView.image = editedImage;
+    PFUser *currentUser = [PFUser currentUser];
+    [currentUser setValue:[Post getPFFileFromImage:editedImage] forKey:@"profilePicture"];
+    [currentUser saveInBackground];
+    
+    // Dismiss UIImagePickerController to go back to your original view controller
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     PostHeaderView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:self.HeaderViewIdentifier];
     if ([self.posts count] > 0) {
         // Set text labels for username and date posted
         Post *post = self.posts[section];
-        header.timestampLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 21)];
+        if (header.timestampLabel == nil) {
+            header.timestampLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 21)];
+        }
         
         // Convert the createdAt property into a string
         NSString *createdAtOriginalString = post.createdAt.description;

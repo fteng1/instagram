@@ -21,5 +21,6 @@
 
 + (void) postUserImage: (Post *)post withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 + (Post *) initPost: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption;
++ (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image;
 
 @end
