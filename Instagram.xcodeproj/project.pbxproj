@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7033CCBB26961C6C00D52FAC /* InfiniteScrollActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7033CCBA26961C6C00D52FAC /* InfiniteScrollActivityView.m */; };
 		708C165A2694E9B5000478E7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 708C16592694E9B5000478E7 /* AppDelegate.m */; };
 		708C165D2694E9B5000478E7 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 708C165C2694E9B5000478E7 /* SceneDelegate.m */; };
 		708C16632694E9B6000478E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 708C16612694E9B6000478E7 /* Main.storyboard */; };
@@ -51,6 +52,8 @@
 		507AA346C8D1AB923466F60D /* Pods-Instagram-InstagramUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram-InstagramUITests.release.xcconfig"; path = "Target Support Files/Pods-Instagram-InstagramUITests/Pods-Instagram-InstagramUITests.release.xcconfig"; sourceTree = "<group>"; };
 		62588021E30BAB0538055C85 /* Pods-Instagram-InstagramUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram-InstagramUITests.debug.xcconfig"; path = "Target Support Files/Pods-Instagram-InstagramUITests/Pods-Instagram-InstagramUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		649396954A3B20F18DE13BBD /* Pods-InstagramTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramTests.release.xcconfig"; path = "Target Support Files/Pods-InstagramTests/Pods-InstagramTests.release.xcconfig"; sourceTree = "<group>"; };
+		7033CCB926961C6C00D52FAC /* InfiniteScrollActivityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfiniteScrollActivityView.h; sourceTree = "<group>"; };
+		7033CCBA26961C6C00D52FAC /* InfiniteScrollActivityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfiniteScrollActivityView.m; sourceTree = "<group>"; };
 		708C16552694E9B5000478E7 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		708C16582694E9B5000478E7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		708C16592694E9B5000478E7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -197,6 +200,8 @@
 			children = (
 				708C169F26950EFF000478E7 /* PostCell.h */,
 				708C16A026950EFF000478E7 /* PostCell.m */,
+				7033CCB926961C6C00D52FAC /* InfiniteScrollActivityView.h */,
+				7033CCBA26961C6C00D52FAC /* InfiniteScrollActivityView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -465,6 +470,7 @@
 			files = (
 				708C16952694F4A3000478E7 /* LoginViewController.m in Sources */,
 				708C16982694F61C000478E7 /* FeedViewController.m in Sources */,
+				7033CCBB26961C6C00D52FAC /* InfiniteScrollActivityView.m in Sources */,
 				708C165A2694E9B5000478E7 /* AppDelegate.m in Sources */,
 				708C16A126950EFF000478E7 /* PostCell.m in Sources */,
 				708C169B2695031C000478E7 /* ComposeViewController.m in Sources */,
