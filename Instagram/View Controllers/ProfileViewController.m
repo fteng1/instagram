@@ -28,13 +28,23 @@
 
 @implementation ProfileViewController
 
+// sets initial value for one of the properties
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    self = [super initWithCoder:decoder];
+    if (self) {
+        self.firstAccessedFromTab = true;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.HeaderViewIdentifier = @"PostHeaderView";
     self.userTableView.delegate = self;
     self.userTableView.dataSource = self;
-    if (self.tabBarController.delegate == nil) {
+    if (self.tabBarController.delegate == nil && self.firstAccessedFromTab) {
         self.tabBarController.delegate = self;
         self.user = [PFUser currentUser];
 

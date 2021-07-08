@@ -242,8 +242,8 @@
     
     // Bring up profile view if header is tapped
     if ([[segue identifier] isEqualToString:@"profileSegue"]) {
-        UINavigationController *navigationController = [segue destinationViewController];
-        ProfileViewController *profileController = (ProfileViewController*)navigationController.topViewController;
+        ProfileViewController *profileController = [segue destinationViewController];
+        profileController.firstAccessedFromTab = false;
         
         // get author's profile
         PostHeaderView *tappedCell = sender;
