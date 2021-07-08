@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PostHeaderView : UITableViewHeaderFooterView
 @property (strong, nonatomic) UILabel *usernameLabel;
 @property (strong, nonatomic) UILabel *timestampLabel;
-@property (strong, nonatomic) UIView *header;
+@property (strong, nonatomic) UIImageView *profileImage;
 @end
 
 NS_ASSUME_NONNULL_END

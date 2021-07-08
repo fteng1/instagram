@@ -166,10 +166,18 @@
     if ([self.posts count] > 0) {
         // Set text labels for username and date posted
         Post *post = self.posts[section];
-        header.textLabel.text = post.username;
         if (header.timestampLabel == nil) {
             header.timestampLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 21)];
         }
+        if (header.usernameLabel == nil) {
+            header.usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 21)];
+        }
+        if (header.profileImage == nil) {
+            header.profileImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
+        }
+        
+        // set poster username
+        header.usernameLabel.text = post.username;
         
         // Convert the createdAt property into a string
         NSString *createdAtOriginalString = post.createdAt.description;
@@ -180,12 +188,28 @@
         NSDate *date = [formatter dateFromString:createdAtOriginalString];
         // Put date in time ago format and set label
         header.timestampLabel.text = date.shortTimeAgoSinceNow;
+        
+        // set poster profile picture
+        PFUser *poster = post.author;
+        PFQuery *query = [PFQuery queryWithClassName:@"_User"];
+        [query whereKey:@"objectId" equalTo:poster.objectId];
+        
+        // get profile picture of each post's author
+        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable user, NSError * _Nullable error) {
+            if (user != nil) {
+                header.profileImage.image = [UIImage imageWithData:((PFFileObject *) ([((PFUser *) user[0]) valueForKey:@"profilePicture"])).getData];
+            }
+            else {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
+
     }
     return header;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 25;
+    return 50;
 }
 
 #pragma mark - Navigation

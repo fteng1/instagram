@@ -38,7 +38,7 @@
     [self.userTableView reloadData];
     
     // change shape of profile picture to be a circle
-    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height /2;
+    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height / 2;
     self.profileImageView.layer.masksToBounds = YES;
     
     self.refreshControl = [[UIRefreshControl alloc] init];
