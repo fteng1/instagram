@@ -13,7 +13,7 @@
 #import "Post.h"
 #import <DateTools.h>
 
-@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UIImagePickerControllerDelegate>
+@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UIImagePickerControllerDelegate, UITabBarControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *userTableView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
@@ -34,8 +34,13 @@
     self.HeaderViewIdentifier = @"PostHeaderView";
     self.userTableView.delegate = self;
     self.userTableView.dataSource = self;
-    [self fetchPosts];
-    [self.userTableView reloadData];
+    if (self.tabBarController.delegate == nil) {
+        self.tabBarController.delegate = self;
+        self.user = [PFUser currentUser];
+
+        [self fetchPosts];
+        [self updateFields];
+    }
     
     // change shape of profile picture to be a circle
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height / 2;
@@ -56,21 +61,19 @@
     self.userTableView.contentInset = insets;
     
     [self.userTableView registerClass:[PostHeaderView class] forHeaderFooterViewReuseIdentifier:self.HeaderViewIdentifier];
-    
-    [self updateFields];
 }
 
 - (void)updateFields {
     // Set fields on page
-    self.usernameLabel.text = [PFUser currentUser].username;
-    self.postCountLabel.text = [NSString stringWithFormat:@"%@", [[PFUser currentUser] valueForKey:@"numPosts"]];
-    self.profileImageView.image = [UIImage imageWithData:((PFFileObject *)([[PFUser currentUser] valueForKey:@"profilePicture"])).getData];
+    self.usernameLabel.text = self.user.username;
+    self.postCountLabel.text = [NSString stringWithFormat:@"%@", [self.user valueForKey:@"numPosts"]];
+    self.profileImageView.image = [UIImage imageWithData:((PFFileObject *)([self.user valueForKey:@"profilePicture"])).getData];
 }
 
 - (void)fetchPosts {
     // construct query
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
-    [query whereKey:@"author" equalTo:[PFUser currentUser]];
+    [query whereKey:@"author" equalTo:self.user];
     [query orderByDescending:@"createdAt"];
     query.limit = 20;
 
@@ -109,7 +112,7 @@
 -(void)loadMoreData{
     // construct query
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
-    [query whereKey:@"author" equalTo:[PFUser currentUser]];
+    [query whereKey:@"author" equalTo:self.user];
     [query orderByDescending:@"createdAt"];
     query.limit = [self.posts count] + 20;
 
@@ -183,9 +186,8 @@
     
     // Do something with the images (based on your use case)
     self.profileImageView.image = editedImage;
-    PFUser *currentUser = [PFUser currentUser];
-    [currentUser setValue:[Post getPFFileFromImage:editedImage] forKey:@"profilePicture"];
-    [currentUser saveInBackground];
+    [self.user setValue:[Post getPFFileFromImage:editedImage] forKey:@"profilePicture"];
+    [self.user saveInBackground];
     
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -229,6 +231,20 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 25;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    if ([tabBarController.viewControllers indexOfObject:viewController] == 1) {
+        self.user = [PFUser currentUser];
+
+        [self fetchPosts];
+        [self updateFields];
+    }
 }
 
 #pragma mark - Navigation

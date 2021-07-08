@@ -16,6 +16,7 @@
 #import "InfiniteScrollActivityView.h"
 #import <DateTools.h>
 #import "PostHeaderView.h"
+#import "ProfileViewController.h"
 
 @interface FeedViewController () <ComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *feedTableView;
@@ -164,6 +165,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     PostHeaderView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:self.HeaderViewIdentifier];
     if ([self.posts count] > 0) {
+        header.section = section;
         // Set text labels for username and date posted
         Post *post = self.posts[section];
         if (header.timestampLabel == nil) {
@@ -203,9 +205,15 @@
                 NSLog(@"%@", error.localizedDescription);
             }
         }];
-
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeToProfile:)];
+        [header.contentView addGestureRecognizer:tapGestureRecognizer];
     }
     return header;
+}
+
+- (void)changeToProfile:(UITapGestureRecognizer *)sender{
+    PostHeaderView *header = sender.view.superview;
+    [self performSegueWithIdentifier:@"profileSegue" sender:header];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -220,7 +228,7 @@
     if ([[segue identifier] isEqualToString:@"detailsSegue"]) {
         UITableViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.feedTableView indexPathForCell:tappedCell];
-        Post *post = self.posts[indexPath.row];
+        Post *post = self.posts[indexPath.section];
         
         DetailsViewController *detailsViewController = [segue destinationViewController];
         detailsViewController.post = post;
@@ -230,6 +238,32 @@
         UINavigationController *navigationController = [segue destinationViewController];
         ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
         composeController.delegate = self;
+    }
+    
+    // Bring up profile view if header is tapped
+    if ([[segue identifier] isEqualToString:@"profileSegue"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        ProfileViewController *profileController = (ProfileViewController*)navigationController.topViewController;
+        
+        // get author's profile
+        PostHeaderView *tappedCell = sender;
+        Post *post = self.posts[tappedCell.section];
+        NSLog(@"%ld", tappedCell.section);
+        PFUser *poster = post.author;
+        PFQuery *query = [PFQuery queryWithClassName:@"_User"];
+        [query whereKey:@"objectId" equalTo:poster.objectId];
+        
+        // get profile picture of each post's author
+        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable user, NSError * _Nullable error) {
+            if (user != nil) {
+                profileController.user = user[0];
+                [profileController updateFields];
+                [profileController fetchPosts];
+            }
+            else {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
     }
 }
 

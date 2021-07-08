@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) UILabel *usernameLabel;
 @property (strong, nonatomic) UILabel *timestampLabel;
 @property (strong, nonatomic) UIImageView *profileImage;
+@property (assign, nonatomic) NSInteger section;
 @end
 
 NS_ASSUME_NONNULL_END

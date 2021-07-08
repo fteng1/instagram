@@ -241,6 +241,7 @@
                                             <outlet property="captionLabel" destination="jzE-vI-3Gx" id="1Os-MH-1v9"/>
                                             <outlet property="photoView" destination="wLg-sf-jMr" id="Ob5-OB-XrG"/>
                                             <segue destination="O5b-d5-ui0" kind="presentation" identifier="detailsSegue" id="s53-oH-SqP"/>
+                                            <segue destination="9pg-3P-dsA" kind="show" identifier="profileSegue" trigger="accessoryAction" id="Gqd-CT-grt"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -248,6 +249,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="32x-B0-acm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="b4D-xX-xHz" firstAttribute="leading" secondItem="32x-B0-acm" secondAttribute="leading" id="4Cv-uE-el2"/>
                             <constraint firstItem="b4D-xX-xHz" firstAttribute="trailing" secondItem="32x-B0-acm" secondAttribute="trailing" id="AWp-ca-8Zt"/>
@@ -278,6 +280,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sPt-T0-7ET" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3169" y="-907"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="4o0-eS-Hsb">
+            <objects>
+                <navigationController id="9pg-3P-dsA" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Ifq-h8-dRq"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UKy-sK-zzf">
+                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="LUk-rf-28n" kind="relationship" relationship="rootViewController" id="Fus-Ka-3Ke"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yXd-qE-gYy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3251" y="191"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="WIe-eV-YIj">
@@ -492,6 +511,9 @@
             <point key="canvasLocation" x="2122" y="1007"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Fus-Ka-3Ke"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="feed_tab" width="25" height="25"/>
         <image name="insta_camera_btn" width="25" height="25"/>
