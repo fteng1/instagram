@@ -189,7 +189,7 @@
         // Put date in time ago format and set label
         header.timestampLabel.text = date.shortTimeAgoSinceNow;
         
-        // set poster profile picture
+        // set author profile picture
         PFUser *poster = post.author;
         PFQuery *query = [PFQuery queryWithClassName:@"_User"];
         [query whereKey:@"objectId" equalTo:poster.objectId];

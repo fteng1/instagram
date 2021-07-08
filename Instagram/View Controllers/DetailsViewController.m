@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 
 @end
 
@@ -35,6 +36,24 @@
     self.timestampLabel.text = date.shortTimeAgoSinceNow;
     
     self.usernameLabel.text = self.post.username;
+    
+    // set author profile picture
+    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height / 2;
+    self.profileImageView.layer.masksToBounds = YES;
+    PFUser *poster = self.post.author;
+    PFQuery *query = [PFQuery queryWithClassName:@"_User"];
+    [query whereKey:@"objectId" equalTo:poster.objectId];
+    
+    // get profile picture of each post's author
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable user, NSError * _Nullable error) {
+        if (user != nil) {
+            self.profileImageView.image = [UIImage imageWithData:((PFFileObject *) ([((PFUser *) user[0]) valueForKey:@"profilePicture"])).getData];
+        }
+        else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+
 }
 
 - (IBAction)onBackTap:(id)sender {
