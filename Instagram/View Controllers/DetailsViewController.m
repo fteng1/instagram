@@ -7,6 +7,7 @@
 
 #import "DetailsViewController.h"
 #import <DateTools.h>
+#import <Parse/Parse.h>
 
 @interface DetailsViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
@@ -14,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (weak, nonatomic) IBOutlet UILabel *numLikesLabel;
 
 @end
 
@@ -24,6 +27,8 @@
     // Do any additional setup after loading the view.
     self.photoView.image = [UIImage imageWithData:self.post.image.getData];
     self.captionLabel.text = self.post.caption;
+    [self.likeButton setImage:[UIImage systemImageNamed:@"heart.fill"] forState:UIControlStateSelected];
+    [self.likeButton setImage:[UIImage systemImageNamed:@"heart"] forState:UIControlStateNormal];
     
     // Format createdAt date string
     NSString *createdAtOriginalString = self.post.createdAt.description;
@@ -35,7 +40,9 @@
     // Put date in time ago format
     self.timestampLabel.text = date.shortTimeAgoSinceNow;
     
+    // Set username and number of likes
     self.usernameLabel.text = self.post.username;
+    self.numLikesLabel.text = [NSString stringWithFormat:@"%@", self.post.likeCount];
     
     // set author profile picture
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height / 2;
@@ -54,6 +61,14 @@
         }
     }];
 
+}
+
+- (IBAction)onLikeTap:(id)sender {
+    self.likeButton.selected = true;
+    self.post.likeCount = [NSNumber numberWithInt:[self.post.likeCount intValue] + 1];
+    self.numLikesLabel.text = [NSString stringWithFormat:@"%@", self.post.likeCount];
+    
+    [self.post saveInBackground];
 }
 
 - (IBAction)onBackTap:(id)sender {
