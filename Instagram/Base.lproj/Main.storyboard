@@ -419,7 +419,7 @@
             </objects>
             <point key="canvasLocation" x="4236.9230769230771" y="-324.17061611374407"/>
         </scene>
-        <!--Compose-->
+        <!--New Post-->
         <scene sceneID="yZp-Oe-f2t">
             <objects>
                 <viewController id="1f3-ew-qmj" customClass="ComposeViewController" sceneMemberID="viewController">
@@ -436,7 +436,7 @@
                                     <outletCollection property="gestureRecognizers" destination="Hnj-R1-S1M" appends="YES" id="2fv-z0-QBb"/>
                                 </connections>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write a caption..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K0g-R1-nFa">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Write a caption..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K0g-R1-nFa">
                                 <rect key="frame" x="163" y="80" width="211" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -446,7 +446,7 @@
                         <viewLayoutGuide key="safeArea" id="1EM-md-KKj"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Compose" id="tOk-fs-l2Z">
+                    <navigationItem key="navigationItem" title="New Post" id="tOk-fs-l2Z">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="Aff-vn-fRB">
                             <connections>
                                 <action selector="onCancelTap:" destination="1f3-ew-qmj" id="gpq-QR-JWQ"/>
