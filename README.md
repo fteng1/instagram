@@ -45,9 +45,20 @@ Please list two areas of the assignment you'd like to **discuss further with you
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
-Required stories: 
+User sign up/log in, user persistence:
+![instagramuserpersistence](https://user-images.githubusercontent.com/41344374/125132535-4cfaab80-e0b9-11eb-9d9e-cf55591ed3e9.gif)
 
+Create a post, view posts, refresh posts, post details: 
+![instagrampostandrefresh](https://user-images.githubusercontent.com/41344374/125132890-d7dba600-e0b9-11eb-8ba3-dfd574364e50.gif)
 
+Running the app using the phone camera;
+![instagramphonecamera](https://user-images.githubusercontent.com/41344374/125132915-e1650e00-e0b9-11eb-85f4-ea5b035294e1.gif)
+
+Loading more posts with infinite scrolling:
+![instagraminfinitescroll](https://user-images.githubusercontent.com/41344374/125132942-ee81fd00-e0b9-11eb-8f08-de1e02bfafda.gif)
+
+Viewing other user profiles, using tab bar, uploading profile picture, liking photos: 
+![instagramoptionals](https://user-images.githubusercontent.com/41344374/125133092-2b4df400-e0ba-11eb-9db1-7e160121fca0.gif)
 
 GIF created with [EzGif.com](https://ezgif.com/).
 
