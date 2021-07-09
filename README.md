@@ -2,7 +2,7 @@
 
 **Instagram** is a photo sharing app using Parse as its backend.
 
-Time spent: **9** hours spent in total
+Time spent: **13** hours spent in total
 
 ## User Stories
 
@@ -29,7 +29,7 @@ The following **optional** features are implemented:
 - [ ] After the user submits a new post, show a progress HUD while the post is being uploaded to Parse
 - [ ] User can comment on a post and see all comments for each post in the post details screen.
 - [x] User can like a post and see number of likes for each post in the post details screen.
-- [ ] Style the login page to look like the real Instagram login page.
+- [x] Style the login page to look like the real Instagram login page.
 - [ ] Style the feed to look like the real Instagram feed.
 - [ ] Implement a custom camera view.
 
@@ -39,31 +39,33 @@ The following **additional** features are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. Refactor or storing data in such a way to reduce the number of network calls made during the execution of the application. 
+2. Adding a friend or follow system to the app so only posts made by friends are seen, rather than posts from all users. 
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
+Required stories: 
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-GIF created with [Kap](https://getkap.co/).
+
+GIF created with [EzGif.com](https://ezgif.com/).
 
 ## Credits
 
-List an 3rd party libraries, icons, graphics, or other assets you used in your app.
-
-- [AFNetworking](https://github.com/AFNetworking/AFNetworking) - networking task library
+- [DateTools](https://github.com/MatthewYork/DateTools) - date handling library
+- [Parse](https://parseplatform.org/) - database library
 
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+- The screen did not switch to login page after logging out, which was resolved by changing the screen in the SceneDelegate.
+- Switching to the profile tab initially did not bring up the profile of the current user, which required moving code from viewWillAppear to the viewDidLoad function. 
+- Had issues with getting the TapGestureRecognizer to correspond with the section it was currently in, which required getting the superview of the TapGestureRecognizer and passing the section number through it. 
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright 2021 Felianne Teng
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
