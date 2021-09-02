@@ -1,6 +1,6 @@
 # Project 4 - *Instagram*
 
-**Instagram** is a photo sharing app using Parse as its backend.
+**Instagram** is a photo sharing app using Parse as its backend. 
 
 Time spent: **15** hours spent in total
 
@@ -39,8 +39,8 @@ The following **additional** features are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1. Refactor or storing data in such a way to reduce the number of network calls made during the execution of the application. 
-2. Adding a friend or follow system to the app so only posts made by friends are seen, rather than posts from all users. 
+1. Refactor or storing data in such a way to reduce the number of network calls made during the execution of the application.
+2. Adding a friend or follow system to the app so only posts made by friends are seen, rather than posts from all users.
 
 ## Video Walkthrough
 
@@ -50,7 +50,7 @@ User sign up/log in, user persistence:
 
 ![instagramuserpersistence](https://user-images.githubusercontent.com/41344374/125132535-4cfaab80-e0b9-11eb-9d9e-cf55591ed3e9.gif)
 
-Create a post, view posts, refresh posts, post details: 
+Create a post, view posts, refresh posts, post details:
 
 ![instagrampostandrefresh](https://user-images.githubusercontent.com/41344374/125132890-d7dba600-e0b9-11eb-8ba3-dfd574364e50.gif)
 
@@ -62,7 +62,7 @@ Loading more posts with infinite scrolling:
 
 ![instagraminfinitescroll](https://user-images.githubusercontent.com/41344374/125132942-ee81fd00-e0b9-11eb-8f08-de1e02bfafda.gif)
 
-Viewing other user profiles, using tab bar, uploading profile picture, liking photos: 
+Viewing other user profiles, using tab bar, uploading profile picture, liking photos:
 
 ![instagramoptionals](https://user-images.githubusercontent.com/41344374/125133092-2b4df400-e0ba-11eb-9db1-7e160121fca0.gif)
 
@@ -77,8 +77,8 @@ GIF created with [EzGif.com](https://ezgif.com/).
 ## Notes
 
 - The screen did not switch to login page after logging out, which was resolved by changing the screen in the SceneDelegate.
-- Switching to the profile tab initially did not bring up the profile of the current user, which required moving code from viewWillAppear to the viewDidLoad function. 
-- Had issues with getting the TapGestureRecognizer to correspond with the section it was currently in, which required getting the superview of the TapGestureRecognizer and passing the section number through it. 
+- Switching to the profile tab initially did not bring up the profile of the current user, which required moving code from viewWillAppear to the viewDidLoad function.
+- Had issues with getting the TapGestureRecognizer to correspond with the section it was currently in, which required getting the superview of the TapGestureRecognizer and passing the section number through it.
 
 ## License
 
